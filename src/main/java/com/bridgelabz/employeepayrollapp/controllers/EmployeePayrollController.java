@@ -18,46 +18,80 @@ public class EmployeePayrollController {
     @Autowired
     private IEmployeePayrollService employeePayrollService;
 
-    @RequestMapping(value = {"","/","/get"})
+    /**
+     * This api handles get request and gives back
+     * list of all the employees' information in json format.
+     *
+     * @return ResponseDTO which has employees information in json format.
+     */
+    @GetMapping("/allemployees")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData()
     {
-        List<EmployeePayrollData> employeeDataList = null;
-        employeeDataList = employeePayrollService.getEmployeePayrollData();
+        List<EmployeePayrollData> employeeDataList = employeePayrollService.getEmployeePayrollData();
         ResponseDTO responseDTO =  new ResponseDTO("Get Call Success : ", employeeDataList);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/get/{empId}")
+    /**
+     * This api handles request and gives back specific employee details
+     * against given employee id.
+     *
+     * @param empId - represent employee id.
+     * @return ResponseDTO which has employee information in json format.
+     */
+    @GetMapping("/employeebyid/{empId}")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId)
     {
 
         EmployeePayrollData employeePayrollData = employeePayrollService.getEmployeePayrollDataById(empId);
         ResponseDTO responseDTO = new ResponseDTO("Get Call For Id Successful : ", employeePayrollData);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    /**
+     * This api handle post request,
+     * accepts employee information and store it.
+     *
+     * @param employeePayrollDTO - has employee information which is passed by post request.
+     * @return ResponseDTO - which has appropriate message for post request along with employee information.
+     */
+    @PostMapping("/createemployee")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO)
     {
 
         EmployeePayrollData employeePayrollData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);
         ResponseDTO responseDTO = new ResponseDTO("Created Employee Payroll Data Successfully : ", employeePayrollData);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{empId}")
+    /**
+     * This api handles put request.
+     * update existing employee information provided by the user.
+     *
+     * @param empId - used to check if the employee related to provided id is present or not.
+     * @param employeePayrollDTO - carry information to be updated for the employee.
+     * @return ResponseDTO - which has appropriate message for put request along with employee information.
+     */
+    @PutMapping("/updateemployee/{empId}")
     public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,@RequestBody EmployeePayrollDTO employeePayrollDTO)
     {
         EmployeePayrollData employeePayrollData = employeePayrollService.updateEmployeePayrollData(empId, employeePayrollDTO);
         ResponseDTO responseDTO =  new ResponseDTO("Employee Payroll Data Updated Successfully: ", employeePayrollData);
-        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{empId}")
+    /**
+     * This api handles delete request.
+     * If the employee is present for the provided employee id then delete that record.
+     *
+     * @param empId - checks for the employee is present or not if yes delete that record.
+     * @return ResponseDTO - which has appropriate message for delete request.
+     */
+    @DeleteMapping("/deleteemployee/{empId}")
     public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId)
     {
         employeePayrollService.deleteEmployeePayrollData(empId);
         ResponseDTO responseDTO = new ResponseDTO("Deleted Successfully", "Deleted Id : "+ empId);
-        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }
