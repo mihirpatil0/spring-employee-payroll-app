@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService{
 
-    private List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
+    private final List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
 
     @Override
     public List<EmployeePayrollData> getEmployeePayrollData() {
