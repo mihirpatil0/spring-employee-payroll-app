@@ -1,0 +1,13 @@
+2021-09-02 00:39:18.577  INFO 5400 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Starting EmployeePayrollAppApplication using Java 16.0.2 on NARUTO with PID 5400 (C:\Users\mihir\IdeaProjects\EmployeePayrollApp\target\classes started by mihir in C:\Users\mihir\IdeaProjects\EmployeePayrollApp)
+2021-09-02 00:39:18.580 DEBUG 5400 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-09-02 00:39:18.581  INFO 5400 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : No active profile set, falling back to default profiles: default
+2021-09-02 00:39:20.033  WARN 5400 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2021-09-02 00:39:20.716  WARN 5400 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-09-02 00:39:21.002  INFO 5400 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Started EmployeePayrollAppApplication in 2.798 seconds (JVM running for 3.56)
+2021-09-02 00:39:21.009  INFO 5400 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Employee Payroll App Started
+2021-09-02 00:40:59.163  INFO 5728 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Starting EmployeePayrollAppApplication using Java 16.0.2 on NARUTO with PID 5728 (C:\Users\mihir\IdeaProjects\EmployeePayrollApp\target\classes started by mihir in C:\Users\mihir\IdeaProjects\EmployeePayrollApp)
+2021-09-02 00:40:59.165 DEBUG 5728 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Running with Spring Boot v2.5.4, Spring v5.3.9
+2021-09-02 00:40:59.166  INFO 5728 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : No active profile set, falling back to default profiles: default
+2021-09-02 00:41:01.413  WARN 5728 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-09-02 00:41:01.809  INFO 5728 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Started EmployeePayrollAppApplication in 2.968 seconds (JVM running for 3.667)
+2021-09-02 00:41:01.812  INFO 5728 --- [restartedMain] c.b.e.EmployeePayrollAppApplication      : Employee Payroll App Started
