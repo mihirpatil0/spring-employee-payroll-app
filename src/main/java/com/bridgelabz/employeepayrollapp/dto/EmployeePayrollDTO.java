@@ -20,7 +20,7 @@ public class EmployeePayrollDTO {
     @Pattern(regexp = "male|female", message = "Gender needs to be male or female")
     public String gender;
 
-    @JsonFormat(pattern = "dd MM yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "StartDate should not be empty")
     @PastOrPresent(message = "StartDate should be past or today's date")
     public LocalDate startDate;
