@@ -13,11 +13,22 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 
     private final List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
 
+    /**
+     * This method gives all the employee information.
+     *
+     * @return employeePayrollDataList - which is an array list which has all the employee information.
+     */
     @Override
     public List<EmployeePayrollData> getEmployeePayrollData() {
         return employeePayrollDataList;
     }
 
+    /**
+     * This method returns single employee information with respect to provided empId.
+     *
+     * @param empId - hold number that represent specific employee.
+     * @return employeePayrollDataList - list with single employee data.
+     */
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int empId) {
         return employeePayrollDataList.stream()
@@ -26,6 +37,12 @@ public class EmployeePayrollService implements IEmployeePayrollService{
                 .orElseThrow(() -> new EmployeePayrollException("Requested Employee For An Given Id Is Not Found."));
     }
 
+    /**
+     * Store employee information.
+     *
+     * @param employeePayrollDTO which consist employee name and salary.
+     * @return Same employee object which has been created.
+     */
     @Override
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData employeePayrollData = new EmployeePayrollData(employeePayrollDataList.size()+1,employeePayrollDTO);
@@ -33,6 +50,13 @@ public class EmployeePayrollService implements IEmployeePayrollService{
         return employeePayrollData;
     }
 
+    /**
+     * This method update employee information with respect to given id.
+     *
+     * @param empId Represent which employee details to be updated.
+     * @param employeePayrollDTO Holds new updated employee details.
+     * @return same object.
+     */
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData employeePayrollData = this.getEmployeePayrollDataById(empId);
@@ -42,6 +66,11 @@ public class EmployeePayrollService implements IEmployeePayrollService{
         return employeePayrollData;
     }
 
+    /**
+     * This method delete employee with respect to given employee id.
+     *
+     * @param empId holds employee id.
+     */
     @Override
     public void deleteEmployeePayrollData(int empId) {
         employeePayrollDataList.remove(empId-1);
