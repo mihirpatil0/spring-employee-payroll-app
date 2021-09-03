@@ -52,6 +52,19 @@ public class EmployeePayrollController {
     }
 
     /**
+     * This api gives back records of employee which matches to given department.
+     *
+     * @param department holds department name.
+     * @return Record of employee.
+     */
+    @GetMapping("/department/{department}")
+    public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("department") String department){
+        List<EmployeePayrollData> employeePayrollDataList = employeePayrollService.getEmployeesByDepartment(department);
+        ResponseDTO responseDTO = new ResponseDTO("Get Call Id Successful ", employeePayrollDataList);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    /**
      * This api handle post request,
      * accepts employee information and store it.
      *
