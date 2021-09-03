@@ -42,6 +42,17 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     }
 
     /**
+     * This methods gives back employee which is associated with given department.
+     *
+     * @param department
+     * @return
+     */
+    @Override
+    public List<EmployeePayrollData> getEmployeesByDepartment(String department){
+        return employeePayrollRepository.findEmployeesByDepartment(department);
+    }
+
+    /**
      * Store employee information.
      *
      * @param employeePayrollDTO which consist employee name and salary.
