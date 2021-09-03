@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("employeepayrollservice")
+@RequestMapping("employeepayroll")
 public class EmployeePayrollController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class EmployeePayrollController {
      *
      * @return ResponseDTO which has employees information in json format.
      */
-    @GetMapping("/allemployees")
+    @GetMapping("/employees")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData()
     {
         List<EmployeePayrollData> employeeDataList = employeePayrollService.getEmployeePayrollData();
@@ -40,7 +40,7 @@ public class EmployeePayrollController {
      * @param empId - represent employee id.
      * @return ResponseDTO which has employee information in json format.
      */
-    @GetMapping("/employeebyid/{empId}")
+    @GetMapping("/employee/{empId}")
     public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("empId") int empId)
     {
 
@@ -56,7 +56,7 @@ public class EmployeePayrollController {
      * @param employeePayrollDTO - has employee information which is passed by post request.
      * @return ResponseDTO - which has appropriate message for post request along with employee information.
      */
-    @PostMapping("/createemployee")
+    @PostMapping("/create")
     public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO)
     {
 
@@ -73,8 +73,8 @@ public class EmployeePayrollController {
      * @param employeePayrollDTO - carry information to be updated for the employee.
      * @return ResponseDTO - which has appropriate message for put request along with employee information.
      */
-    @PutMapping("/updateemployee/{empId}")
-    public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId,@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO)
+    @PutMapping("/update/{empId}")
+    public ResponseEntity<ResponseDTO> updateEmployeePayrollData(@PathVariable("empId") int empId, @Valid @RequestBody EmployeePayrollDTO employeePayrollDTO)
     {
         EmployeePayrollData employeePayrollData = employeePayrollService.updateEmployeePayrollData(empId, employeePayrollDTO);
         ResponseDTO responseDTO =  new ResponseDTO("Employee Payroll Data Updated Successfully: ", employeePayrollData);
@@ -88,7 +88,7 @@ public class EmployeePayrollController {
      * @param empId - checks for the employee is present or not if yes delete that record.
      * @return ResponseDTO - which has appropriate message for delete request.
      */
-    @DeleteMapping("/deleteemployee/{empId}")
+    @DeleteMapping("/delete/{empId}")
     public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId)
     {
         employeePayrollService.deleteEmployeePayrollData(empId);
