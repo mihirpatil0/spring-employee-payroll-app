@@ -7,8 +7,6 @@ import com.bridgelabz.employeepayrollapp.repository.EmployeePayrollRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,30 +16,29 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     @Autowired
     private EmployeePayrollRepository employeePayrollRepository;
 
-    private final List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
-
     /**
      * This method gives all the employee information.
      *
-     * @return employeePayrollDataList - which is an array list which has all the employee information.
+     * @return All the employee.
      */
     @Override
     public List<EmployeePayrollData> getEmployeePayrollData() {
-        return employeePayrollDataList;
+
+        return employeePayrollRepository.findAll();
     }
 
     /**
      * This method returns single employee information with respect to provided empId.
      *
      * @param empId - hold number that represent specific employee.
-     * @return employeePayrollDataList - list with single employee data.
+     * @return Updated information of employee, if not present gives error message.
      */
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int empId) {
-        return employeePayrollDataList.stream()
-                .filter(employeePayrollData -> employeePayrollData.getEmployeeId() == empId)
-                .findFirst()
-                .orElseThrow(() -> new EmployeePayrollException("Requested Employee For An Given Id Is Not Found."));
+        return employeePayrollRepository
+                .findById(empId)
+                .orElseThrow(
+                        () -> new EmployeePayrollException("Employee with employeeId " + empId + " does not exists..!!"));
     }
 
     /**
@@ -54,7 +51,6 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData employeePayrollData = new EmployeePayrollData(employeePayrollDTO);
         log.debug("Employee Data " + employeePayrollData);
-        employeePayrollDataList.add(employeePayrollData);
         return employeePayrollRepository.save(employeePayrollData);
     }
 
@@ -68,10 +64,8 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int empId, EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData employeePayrollData = this.getEmployeePayrollDataById(empId);
-        employeePayrollData.setName(employeePayrollDTO.name);
-        employeePayrollData.setSalary(employeePayrollDTO.salary);
-        employeePayrollDataList.set(empId-1,employeePayrollData);
-        return employeePayrollData;
+        employeePayrollData.updateEmployeePayrollData(employeePayrollDTO);
+        return employeePayrollRepository.save(employeePayrollData);
     }
 
     /**
@@ -81,6 +75,7 @@ public class EmployeePayrollService implements IEmployeePayrollService{
      */
     @Override
     public void deleteEmployeePayrollData(int empId) {
-        employeePayrollDataList.remove(empId-1);
+        EmployeePayrollData employeePayrollData = this.getEmployeePayrollDataById(empId);
+        employeePayrollRepository.delete(employeePayrollData);
     }
 }
